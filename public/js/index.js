@@ -1,14 +1,15 @@
 var vue = new Vue({
-	el : "#app",
+	el : '#app',
 	data : {
 		router_name : {
-			"hello" : "欢迎页面",
-			"login" : "登陆"
+			'login' : '登陆',
+			'hello' : 'hello',
+			'demo' : 'demo'
 		},
 		router : "",
 		global : {
 			common : {
-				res_handle : function(res){
+				resHandle : function(res){
 					if(typeof res != "object"){
 						res = JSON.parse(res);
 					}
@@ -19,7 +20,7 @@ var vue = new Vue({
 					}
 					return res;
 				},
-				res_err_handle : function(res){
+				resErrHandle : function(res){
 					alert(res.error_message);
 				},
 
@@ -53,8 +54,8 @@ var vue = new Vue({
 				},
 
 				//管理员数据
-				admin_data : undefined,
-				init_handle : function(){
+				adminData : undefined,
+				initHandle : function(){
 					var hash = location.hash;
 					//登陆页面不需要获取管理员信息
 					if(hash == "login"){
@@ -94,8 +95,8 @@ var vue = new Vue({
 			pages : keke.leaves,
 			config : {
 				number : 1,
-				base_url : location.origin,
-				base_res_url : location.origin + "/res",
+				baseUrl : location.origin,
+				baseResUrl : location.origin + "/res",
 			}
 		},
 		index : {
@@ -105,14 +106,18 @@ var vue = new Vue({
 				icon: 'history',
 				router : "login"
 			},{
-				text : "欢迎",
+				text : "hello",
 				icon: 'history',
 				router : "hello"
+			},{
+				text : "demo",
+				icon: 'history',
+				router : "demo"
 			}]
 		}
 	},
 	methods : {
-		init : function(){
+		router_init : function(){
 			var that = this;
 			//监听路由
 			this.router = location.hash.substring(1);
@@ -132,13 +137,29 @@ var vue = new Vue({
 					return false;
 				}
 			}
+
+			//拉管理员信息
+			$.ajax({
+				url : that.global.config.baseUrl + "/api/m/user/get",
+				success : function(res){
+					res = that.global.common.resHandle(res);
+					if(res.status != 2000){
+						return ;
+					}
+
+					that.global.common.adminData = res.source.admin_user;
+				}
+			})
 		},
-		drawer_router : function(r){
+		init : function(){
+			this.router_init();
+		},
+		drawerRouter : function(r){
 			location.hash = r;
 			this.index.drawer = !this.index.drawer;
 		},
 
-		to_login_page : function(){
+		toLoginPage : function(){
 			location.hash = "login";
 		}
 	},

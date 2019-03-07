@@ -24,6 +24,13 @@ var keke = {
 		}
 	},
 	init : function(){
+		//配置的加载组件列表
+		var components = [
+			'hello', 
+			'login',
+			'demo',
+		];
+
 		var sdk_list = {
 			files : [],
 			num : 0,
@@ -37,11 +44,7 @@ var keke = {
 			num : 0
 		}; //入口文件
 		var leaves_list = {
-			files : [{
-				src : "./js/leaves/login.js"
-			}, {
-				src : "./js/leaves/hello.js"
-			}],
+			files : [],
 			num : 0
 		}; //页面数据流
 
@@ -54,15 +57,16 @@ var keke = {
 		sdk_list.files.push({
 			src : "dist/vuetify.min.js"
 		})
+		sdk_list.files.push({
+			src : "dist/wangEditor.min.js"
+		})
 
-		var component_paths = [
-			"js/components/hello/hello_page.js",
-			"js/components/login/login_page.js",
-		]
-
-		for(var i=0;i<component_paths.length;i++){
+		for(var i=0;i<components.length;i++){
 			component_list.files.push({
-				src : component_paths[i]
+				src : "js/components/"+components[i]+"/"+components[i]+"Page.js"
+			});
+			leaves_list.files.push({
+				src : "./js/leaves/"+components[i]+".js"
 			})
 		}
 
