@@ -10,12 +10,11 @@ Vue.component('demo', {
 			var scope = vue.global.pages[this.data.config.name];
 			var that = this;
 			scope.datas.loading = true;
-			$.ajax({
-				url : vue.global.config.baseUrl + '/api/m/' + that.data.config.pathName + '/get?page=' + scope.datas.pageNow
+			that.ctrl.ajax({
+				url : keke.config.baseUrl + '/api/m/' + that.data.config.pathName + '/get?page=' + scope.datas.pageNow
 					+ '&item_per_page=' + scope.datas.itemPerPage,
-				success : function(res){
+				successFunction : function(res){
 					scope.datas.loading = false;
-					res = vue.global.common.resHandle(res);
 					if(res.status != '2000'){
 						that.ctrl.alert({
 							message : res.error_message
@@ -26,7 +25,7 @@ Vue.component('demo', {
 					scope.datas.list = res.data.rows;
 					scope.datas.count = res.data.count;
 				},
-				error : function(){
+				errorFunction : function(){
 					scope.datas.loading = true;
 					that.ctrl.alert({
 						message : '网络错误'
@@ -38,6 +37,7 @@ Vue.component('demo', {
 			this.getData();
 		},
 		init : function(){
+			vue.global.common.initHandle();
 			this.getData();
 		},
 		/*
@@ -61,14 +61,14 @@ Vue.component('demo', {
 					form.content = scope.panels.add.editor.txt.html();
 				}
 				
-				$.ajax({
-					url : vue.global.config.baseUrl + '/api/m/' + that.data.config.pathName + '/add',
+				that.ctrl.ajax({
+					url : keke.config.baseUrl + '/api/m/' + that.data.config.pathName + '/add',
 					headers : {
 						'Content-Type' : 'Application/json'
 					},
 					method : "post",
 					data : JSON.stringify(form),
-					success : function(res){
+					successFunction : function(res){
 						scope.datas.loading = false;
 						res = vue.global.common.resHandle(res);
 						if(res.status != '2000'){
@@ -83,7 +83,7 @@ Vue.component('demo', {
 						that.switchAddDataPanel();
 						that.refresh();
 					},
-					error : function(){
+					errorFunction : function(){
 						scope.datas.loading = false;
 						that.ctrl.alert({
 							message : '网络错误'
@@ -164,14 +164,14 @@ Vue.component('demo', {
 			//提交表单
 			var form = {};
 			form[that.data.config.idName] = item[that.data.config.idName]; //设置id
-			$.ajax({
-				url : vue.global.config.baseUrl + '/api/m/' + that.data.config.pathName + '/delete',
+			that.ctrl.ajax({
+				url : keke.config.baseUrl + '/api/m/' + that.data.config.pathName + '/delete',
 				headers : {
 					'Content-Type' : 'Application/json'
 				},
 				data : JSON.stringify(form),
 				method : "post",
-				success : function(res){
+				successFunction : function(res){
 					scope.datas.loading = false;
 					res = vue.global.common.resHandle(res);
 					if(res.status != '2000'){
@@ -185,7 +185,7 @@ Vue.component('demo', {
 					})
 					that.refresh();
 				},
-				error : function(){
+				errorFunction : function(){
 					scope.datas.loading = false;
 					that.ctrl.alert({
 						message : '网络错误'
@@ -211,14 +211,14 @@ Vue.component('demo', {
 					form.content = scope.panels.update.editor.txt.html();
 				}
 
-				$.ajax({
-					url : vue.global.config.baseUrl + '/api/m/' + that.data.config.pathName + '/update',
+				that.ctrl.ajax({
+					url : keke.config.baseUrl + '/api/m/' + that.data.config.pathName + '/update',
 					headers : {
 						'Content-Type' : 'Application/json'
 					},
 					method : "post",
 					data : JSON.stringify(form),
-					success : function(res){
+					successFunction : function(res){
 						scope.datas.loading = false;
 						res = vue.global.common.resHandle(res);
 						if(res.status != '2000'){
@@ -233,7 +233,7 @@ Vue.component('demo', {
 						that.switchUpdateDataPanel();
 						that.refresh();
 					},
-					error : function(){
+					errorFunction : function(){
 						scope.datas.loading = false;
 						that.ctrl.alert({
 							message : '网络错误'
@@ -350,7 +350,7 @@ Vue.component('demo', {
 						<v-img 
 							@click="switchUpdateDataPanel(props.item)"
 							style="width:80px;margin:10px 10px 10px 10px;"
-							:src="vue.global.config.baseResUrl + '/' + props.item.cover_url">
+							:src="keke.config.baseResUrl + '/' + props.item.cover_url">
 						</v-img>
 					</td>
 					<td>
@@ -382,7 +382,8 @@ Vue.component('demo', {
 		</v-flex>
 	</v-layout>
 
-	<v-dialog 
+	<v-dialog
+		data-app="true"
 		dark
 		hide-overlay="true"
 		scrollable=true
@@ -394,7 +395,7 @@ Vue.component('demo', {
 			  class="headline blue lighten-1"
 			  primary-title
 			>
-				新增自助维修
+				新增数据
 			</v-card-title>
 
 			<v-form

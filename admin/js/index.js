@@ -9,21 +9,6 @@ var vue = new Vue({
 		router : "",
 		global : {
 			common : {
-				resHandle : function(res){
-					if(typeof res != "object"){
-						res = JSON.parse(res);
-					}
-					if(res.status == "3002"){
-						let hash = res.hash;
-						location.hash = hash;
-						return res;
-					}
-					return res;
-				},
-				resErrHandle : function(res){
-					alert(res.error_message);
-				},
-
 				//控制器们
 				controllers : {
 					actions : {
@@ -42,8 +27,29 @@ var vue = new Vue({
 								vue.global.common.controllers.leaves.alert.show = false;
 								vue.global.common.controllers.leaves.alert.timeout_instance = undefined;
 							}, 1200)
+						},
+						ajax : function(options){
+							options.success = function(res){
+								if(typeof res != "object"){
+									res = JSON.parse(res);
+								}
+								if(res.status == "3002"){
+									let hash = res.hash;
+									location.hash = hash;
+									return res;
+								}
+								options.successFunction && options.successFunction(res);
+							}
+
+							options.error = function(e){
+								options.errorFunction && options.errorFunction(e);
+							}
+
+							$.ajax(options);
 						}
 					},
+
+					//控制器的缓存全局变量
 					leaves : {
 						alert : {
 							show : false,
@@ -54,26 +60,24 @@ var vue = new Vue({
 				},
 
 				//管理员数据
-				adminData : undefined,
+				admin_user : undefined,
 				initHandle : function(){
-					var hash = location.hash;
 					//登陆页面不需要获取管理员信息
-					if(hash == "login"){
+					if(location.hash == "login"){
 						return ;
 					}
-					$.ajax({
-						url : vue.global.config.base_url + "/api/m/admin/get_admin",
+					vue.global.common.controllers.actions.ajax({
+						url : keke.config.baseUrl + "/api/m/user/get",
 						type : "post",
-						success : function(res){
-							res = vue.global.common.res_handle(res);
+						successFunction : function(res){
 							if(res.status != "2000"){
 								alert(res.error_message);
 								return res;
 							}
-							vue.global.common.admin_data = res.source.admin_data;
+							vue.global.common.admin_user = res.source.admin_user;
 							return res;
 						},
-						error : function(){
+						errorFunction : function(){
 							alert("网络错误");
 						}
 					})
@@ -92,28 +96,13 @@ var vue = new Vue({
 					}
 				}
 			},
-			pages : keke.leaves,
-			config : {
-				number : 1,
-				baseUrl : location.origin,
-				baseResUrl : location.origin + "/res",
-			}
+			pages : keke.leaves
 		},
 		index : {
 			drawer: false,
-			menu : [{
-				text : "登陆",
-				icon: 'history',
-				router : "login"
-			},{
-				text : "hello",
-				icon: 'history',
-				router : "hello"
-			},{
-				text : "demo",
-				icon: 'history',
-				router : "demo"
-			}]
+
+			//主页侧栏导航：
+			menu : keke.config.menu
 		}
 	},
 	methods : {
@@ -137,19 +126,6 @@ var vue = new Vue({
 					return false;
 				}
 			}
-
-			//拉管理员信息
-			$.ajax({
-				url : that.global.config.baseUrl + "/api/m/user/get",
-				success : function(res){
-					res = that.global.common.resHandle(res);
-					if(res.status != 2000){
-						return ;
-					}
-
-					that.global.common.adminData = res.source.admin_user;
-				}
-			})
 		},
 		init : function(){
 			this.router_init();

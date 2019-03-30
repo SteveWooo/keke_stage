@@ -12,33 +12,32 @@ Vue.component("login", {
 			scope.form_data.password = "";
 			scope.form_data.code = "";
 			scope.code.randomNumber = Math.random();
-			scope.code.url = vue.global.config.baseUrl + '/api/m/user/get_code?random='
+			scope.code.url = keke.config.baseUrl + '/api/m/user/get_code?random='
 		},
 
-		submit_login : function(){
+		submitLogin : function(){
 			var scope = vue.global.pages.login;
 			var that = this;
-			$.ajax({
-				url : vue.global.config.baseUrl + "/api/m/user/login",
+			that.ctrl.ajax({
+				url : keke.config.baseUrl + "/api/m/user/login",
 				type : "post",
 				headers : {
 					'Content-Type' : "application/json"
 				},
 				xhrFields: {withCredentials: true},
 				data : JSON.stringify(scope.form_data),
-				success : function(res){
-					res = vue.global.common.resHandle(res);
+				successFunction : function(res){
 					if(res.status != "2000"){
 						that.ctrl.alert({
 							message : res.error_message
 						})
 						return ;
 					}
-					console.log(res);
+					// console.log(res);
 					that.ctrl.alert({
-						message : "登陆成功"
+						message : '登陆成功'
 					})
-					location.hash = "subject";
+					location.hash = 'hello';
 					// location.reload();
 				}
 			})
@@ -90,7 +89,7 @@ Vue.component("login", {
 		<v-flex xs12 class="text-xs-center">
 			<v-btn 
 				color="blue primary"
-				@click="submit_login">
+				@click="submitLogin">
 				登陆
 			</v-btn>
 		</v-flex>

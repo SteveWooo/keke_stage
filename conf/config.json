@@ -1,0 +1,18 @@
+{
+	"server" : {
+		"port" : 81,
+		"base_res_path" : "res",
+		"public_salt" : "a855931d31feb334981d61e37a46a032"
+	},
+	"wechat" : {
+		"appid" : "wxf4314d88d5eda41a",
+		"secret" : "303d08608960884bcc4ee394da577c3d"
+	},
+	"mysql" : {
+		"host" : "115.28.241.66",
+		"user" : "root",
+		"password" : "123456",
+		"database" : "happykeke",
+		"port" : 3306
+	}
+}
