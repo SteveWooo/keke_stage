@@ -10,6 +10,7 @@
 	},
 	"mysql" : {
 		"host" : "115.28.241.66",
+		"host" : "localhost",
 		"user" : "root",
 		"password" : "123456",
 		"database" : "happykeke",
