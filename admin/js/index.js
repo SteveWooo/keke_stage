@@ -106,7 +106,7 @@ var vue = new Vue({
 		}
 	},
 	methods : {
-		router_init : function(){
+		initRouter : function(){
 			var that = this;
 			//监听路由
 			this.router = location.hash.substring(1);
@@ -128,7 +128,7 @@ var vue = new Vue({
 			}
 		},
 		init : function(){
-			this.router_init();
+			this.initRouter();
 		},
 		drawerRouter : function(r){
 			location.hash = r;
