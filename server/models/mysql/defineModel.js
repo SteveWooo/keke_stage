@@ -1,6 +1,11 @@
+/**
+* options no param,直接原路返回swc
+* )需要先定义数据模型，同步到数据库，才能定义索引关系
+*/
+
 const Sequelize = require("sequelize");
-async function models_defined(swc){
-	swc.db.models.users = swc.db.seq.define("users", {
+async function defineModel(swc){
+	swc.dao.models.users = swc.dao.seq.define("users", {
 		openid : {type : Sequelize.STRING(32)},
 		user_id : {type : Sequelize.STRING(32)}, //唯一ID
 		nick_name : {type : Sequelize.STRING()}, //昵称
@@ -14,7 +19,7 @@ async function models_defined(swc){
 		create_at : {type : Sequelize.STRING()},
 		update_at : {type : Sequelize.STRING()},
 	})
-	swc.db.models.demos = swc.db.seq.define("demos", {
+	swc.dao.models.demos = swc.dao.seq.define("demos", {
 		demo_id : {type : Sequelize.STRING(32)},
 		name : {type : Sequelize.TEXT()},
 
@@ -23,7 +28,7 @@ async function models_defined(swc){
 		create_at : {type : Sequelize.STRING()},
 		update_at : {type : Sequelize.STRING()},
 	})
-	swc.db.models.admins = swc.db.seq.define("admins", {
+	swc.dao.models.admins = swc.dao.seq.define("admins", {
 		admin_id : {type : Sequelize.STRING(32)},
 		account : {type : Sequelize.STRING()},
 		password : {type : Sequelize.STRING(32)},
@@ -35,50 +40,31 @@ async function models_defined(swc){
 		update_at : {type : Sequelize.STRING()},
 	})
 
-	//数据索引
-	swc.db.models.demos.belongsTo(swc.db.models.admins, {
-		foreignKey : 'create_by',
-		targetKey : 'admin_id',
-		as : 'admin'
-	})
-	// swc.db.models.childs.belongsTo(swc.db.models.parents, {
-	// 	foreignKey : "parent_id_in_child",
-	// 	targetKey : "parent_id",
-	// 	as : "parent"
-	// })
-
 	return swc;
 }
 
-module.exports = async (swc)=>{
-	var seq = new Sequelize(swc.config.mysql.database, swc.config.mysql.user, swc.config.mysql.password, {
-		host : swc.config.mysql.host,
-		dialect : "mysql",
-		port : swc.config.mysql.port || 3306,
-		operatorsAliases: false,
-		pool : {
-			max : 5,
-			min : 0,
-			acquire : 30000,
-			idle : 10000,
-		},
-		define: {
-	    	timestamps: false
-	 	},
-	 	logging : false
+async function defineIndex(swc){
+	swc.dao.models.demos.belongsTo(swc.dao.models.admins, {
+		foreignKey : 'create_by', //多的一个数据实体
+		targetKey : 'admin_id', //少的一个数据实体
+		as : 'admin'
 	})
-	//检查连接情况
-	try{
-		var res = await seq.authenticate();
-	}catch(e){
-		throw "Unable to connect database :" + e.message
-	}
+	swc.log.info('载入:数据索引');
+	return swc;
+}
 
-	swc.db = {
-		seq : seq,
-		models : {}
+async function syncDatabase(swc){
+	await swc.dao.seq.sync();
+	swc.log.info('同步:数据库模型同步到数据库');
+	return swc;
+}
+
+module.exports = async (swc, options)=>{
+	swc = await defineModel(swc);
+	swc.log.info('载入:数据库模型');
+	if(swc.argv.syncdb === '1'){
+		swc = await syncDatabase(swc);
 	}
-	//定义orm模型
-	swc = await models_defined(swc);
+	swc = await defineIndex(swc);
 	return swc;
 }

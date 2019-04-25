@@ -44,7 +44,7 @@ async function auth(req, res, next){
 	var s = cookie[1];
 	var now = cookie[2];
 
-	var account = await swc.db.models.admins.findAndCountAll({
+	var account = await swc.dao.models.admins.findAndCountAll({
 		where : {
 			account : account
 		}
@@ -73,7 +73,8 @@ async function auth(req, res, next){
 		return ;
 	}
 	
-	req.source.admin_user = {
+	req.response.source = {};
+	req.response.source.admin = {
 		account : account.rows[0].account,
 		name : account.rows[0].name,
 		admin_id : account.rows[0].admin_id

@@ -33,9 +33,9 @@ function loadInitFile(mode){
 }
 
 $.ajax({
-	url : keke.config.baseUrl + "/api/p/mode/get",
+	url : keke.config.baseUrl + "/keke/api/p/mode/get",
 	success : function(res){
-		loadInitFile(res.data);
+		loadInitFile(res.mode);
 	},
 	error : function(e){
 		alert('网络错误！')

@@ -1,7 +1,12 @@
-const config = require("./conf/config.json");
 async function main(){
-	var swc = await require("./server/init").init(config);
-	swc.startup(swc);
+	var swc;
+	try{
+		swc = await require("./server/models/swc/init")();
+		swc = await require('./server/controllers/access')(swc, {});
+		swc.startup(swc);
+	}catch(e){
+		console.log(e)
+	}
 }
 
 main();
