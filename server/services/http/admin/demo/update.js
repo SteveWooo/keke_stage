@@ -4,7 +4,7 @@
 const crypto = require("crypto");
 module.exports = {
 	config : {
-		path : '/keke/api/m/demo/update',
+		path : '/api/m/demo/update',
 		method : 'post',
 		middlewares : [],
 		model : {

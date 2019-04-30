@@ -3,9 +3,9 @@
 */
 module.exports = {
 	config : {
-		path : '/keke/api/p/mode/get',
+		path : '/api/p/mode/get',
 		method : 'get',
-		middlewares : ['authAdmin'],
+		middlewares : [],
 		model : {
 			status : 2000,
 			mode : '',

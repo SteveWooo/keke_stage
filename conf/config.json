@@ -2,11 +2,16 @@
 	"server" : {
 		"port" : 81,
 		"base_res_path" : "res",
-		"public_salt" : "123"
+		"public_salt" : "gg",
+		"bussiness_name" : "keke"
 	},
 	"wechat" : {
-		"appid" : "",
-		"secret" : ""
+		"appid" : "123",
+		"secret" : "123"
+	},
+	"payjs" : {
+		"secret" : "123",
+		"mchid" : "123"
 	},
 	"mysql" : {
 		"host" : "localhost",
@@ -14,5 +19,11 @@
 		"password" : "123456",
 		"database" : "keke_stage",
 		"port" : 3306
+	},
+	"bussiness" : {
+		"apps" : [{
+			"appid" : "test",
+			"secret" : "test"
+		}]
 	}
 }
