@@ -26,53 +26,53 @@ keke.load_files = function(options, callback){
 keke.init = function(){
 	//配置的加载组件列表
 	var components = keke.config.components;
-	var sdk_list = {
+	var sdkList = {
 		files : [],
 		num : 0,
 	}; //必备控件
-	var component_list = {
+	var componentList = {
 		files : [],
 		num : 0
 	}; //组件
-	var enter_list = {
+	var enterList = {
 		files : [],
 		num : 0
 	}; //入口文件
-	var leaves_list = {
+	var modelList = {
 		files : [],
 		num : 0
 	}; //页面数据流
-	sdk_list.files.push({
+	sdkList.files.push({
 		src : "dist/vue.min.js"
 	})
-	sdk_list.files.push({
+	sdkList.files.push({
 		src : "dist/vuetify.min.js"
 	})
-	sdk_list.files.push({
-		src : "dist/wangEditor.min.js"
-	})
+	// sdkList.files.push({
+	// 	src : "dist/wangEditor.min.js"
+	// })
 
 	for(var i=0;i<components.length;i++){
-		component_list.files.push({
-			src : "js/components/"+components[i]+"/"+components[i]+"Page.js"
+		componentList.files.push({
+			src : "js/models/"+components[i]+"/"+components[i]+"Page.js"
 		});
-		leaves_list.files.push({
-			src : "./js/leaves/"+components[i]+".js"
+		modelList.files.push({
+			src : "./js/models/"+components[i]+"/"+components[i]+"Model.js"
 		})
 	}
 
-	enter_list.files.push({
+	enterList.files.push({
 		src : "js/index.js"
 	})
 
 	keke.load_files({
 		num : 0,
-		groups : [leaves_list, sdk_list, component_list, enter_list],
+		groups : [modelList, sdkList, componentList, enterList],
 		result : {}
 	}, function(result){
 		console.log("loaded files");
 	})
 }
-keke.leaves = {};
+keke.models = {};
 
 keke.init();

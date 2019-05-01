@@ -1,3 +1,3 @@
-keke.leaves.hello = {
+keke.models.hello = {
 	data : "hello world"
 }

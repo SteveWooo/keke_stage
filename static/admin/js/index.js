@@ -10,22 +10,22 @@ var vue = new Vue({
 		global : {
 			common : {
 				//控制器们
-				controllers : {
+				utils : {
 					actions : {
 						/*
 						* options : { message : 弹窗消息体 }
 						*/
 						alert : function(options){
-							vue.global.common.controllers.leaves.alert.message = options == undefined ? 
+							vue.global.common.utils.models.alert.message = options == undefined ? 
 								"default alert" : options.message;
 							//清除上一次的计时器
-							if(vue.global.common.controllers.leaves.alert.timeout_instance){
-								clearTimeout(vue.global.common.controllers.leaves.alert.timeout_instance);
+							if(vue.global.common.utils.models.alert.timeout_instance){
+								clearTimeout(vue.global.common.utils.models.alert.timeout_instance);
 							}
-							vue.global.common.controllers.leaves.alert.show = true;
-							vue.global.common.controllers.leaves.alert.timeout_instance = setTimeout(function(){
-								vue.global.common.controllers.leaves.alert.show = false;
-								vue.global.common.controllers.leaves.alert.timeout_instance = undefined;
+							vue.global.common.utils.models.alert.show = true;
+							vue.global.common.utils.models.alert.timeout_instance = setTimeout(function(){
+								vue.global.common.utils.models.alert.show = false;
+								vue.global.common.utils.models.alert.timeout_instance = undefined;
 							}, 1200)
 						},
 						ajax : function(options){
@@ -46,11 +46,21 @@ var vue = new Vue({
 							}
 
 							$.ajax(options);
+						},
+						timetranfers : function(date){
+						    var date = new Date(date * 1);//如果date为13位不需要乘1000
+						    var Y = date.getFullYear() + '-';
+						    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+						    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+						    var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+						    var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+						    var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
+						    return Y+M+D+h+m+s;
 						}
 					},
 
 					//控制器的缓存全局变量
-					leaves : {
+					models : {
 						alert : {
 							show : false,
 							message : "test",
@@ -60,13 +70,13 @@ var vue = new Vue({
 				},
 
 				//管理员数据
-				admin_user : undefined,
+				adminUser : undefined,
 				initHandle : function(){
 					//登陆页面不需要获取管理员信息
 					if(location.hash == "login"){
 						return ;
 					}
-					vue.global.common.controllers.actions.ajax({
+					vue.global.common.utils.actions.ajax({
 						url : keke.config.baseUrl + "/api/m/user/get",
 						type : "post",
 						successFunction : function(res){
@@ -74,29 +84,16 @@ var vue = new Vue({
 								alert(res.error_message);
 								return res;
 							}
-							vue.global.common.admin_user = res.source.admin_user;
+							vue.global.common.adminUser = res.source.admin_user;
 							return res;
 						},
 						errorFunction : function(){
 							alert("网络错误");
 						}
 					})
-				},
-
-				tools : {
-					timetranfers : function(date){
-					    var date = new Date(date * 1);//如果date为13位不需要乘1000
-					    var Y = date.getFullYear() + '-';
-					    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-					    var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
-					    var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
-					    var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
-					    var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
-					    return Y+M+D+h+m+s;
-					}
 				}
 			},
-			pages : keke.leaves
+			pages : keke.models
 		},
 		index : {
 			drawer: false,
@@ -126,6 +123,7 @@ var vue = new Vue({
 					return false;
 				}
 			}
+
 		},
 		init : function(){
 			this.initRouter();

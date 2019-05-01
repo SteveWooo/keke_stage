@@ -2,7 +2,7 @@ Vue.component("login", {
 	data : function(){
 		return {
 			data : vue.global.pages.login,
-			ctrl : vue.global.common.controllers.actions, //工具注入
+			utils : vue.global.common.utils.actions, //工具注入
 		}
 	},
 	methods : {
@@ -18,7 +18,7 @@ Vue.component("login", {
 		submitLogin : function(){
 			var scope = vue.global.pages.login;
 			var that = this;
-			that.ctrl.ajax({
+			that.utils.ajax({
 				url : keke.config.baseUrl + "/api/m/user/login",
 				type : "post",
 				headers : {
@@ -28,13 +28,13 @@ Vue.component("login", {
 				data : JSON.stringify(scope.form_data),
 				successFunction : function(res){
 					if(res.status != "2000"){
-						that.ctrl.alert({
+						that.utils.alert({
 							message : res.error_message
 						})
 						return ;
 					}
 					// console.log(res);
-					that.ctrl.alert({
+					that.utils.alert({
 						message : '登陆成功'
 					})
 					location.hash = 'hello';

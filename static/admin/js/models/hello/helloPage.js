@@ -2,12 +2,13 @@ Vue.component("hello", {
 	data : function(){
 		return {
 			data : vue.global.pages.hello, //数据流载入
-			ctrl : vue.global.common.controllers.actions, //工具注入
+			utils : vue.global.common.utils.actions, //工具注入
 		}
 	},
 	methods : {
 		init : function(){
-			var scope = vue.global.pages.hello;
+			var scope = vue.global.pages[this.data.config.name];
+			var that = this;
 		}
 	},
 	mounted : function(){

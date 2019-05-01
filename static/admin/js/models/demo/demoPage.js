@@ -2,7 +2,7 @@ Vue.component('demo', {
 	data : function(){
 		return {
 			data : vue.global.pages.demo, //数据流载入
-			ctrl : vue.global.common.controllers.actions, //工具注入
+			utils : vue.global.common.utils.actions, //工具注入
 		}
 	},
 	methods : {
@@ -10,13 +10,13 @@ Vue.component('demo', {
 			var scope = vue.global.pages[this.data.config.name];
 			var that = this;
 			scope.datas.loading = true;
-			that.ctrl.ajax({
+			that.utils.ajax({
 				url : keke.config.baseUrl + '/api/m/' + that.data.config.pathName + '/get?page=' + scope.datas.pageNow
 					+ '&item_per_page=' + scope.datas.itemPerPage,
 				successFunction : function(res){
 					scope.datas.loading = false;
 					if(res.status != '2000'){
-						that.ctrl.alert({
+						that.utils.alert({
 							message : res.error_message
 						})
 						return ;
@@ -27,7 +27,7 @@ Vue.component('demo', {
 				},
 				errorFunction : function(){
 					scope.datas.loading = true;
-					that.ctrl.alert({
+					that.utils.alert({
 						message : '网络错误'
 					})
 				}
@@ -61,7 +61,7 @@ Vue.component('demo', {
 					form.content = scope.panels.add.editor.txt.html();
 				}
 				
-				that.ctrl.ajax({
+				that.utils.ajax({
 					url : keke.config.baseUrl + '/api/m/' + that.data.config.pathName + '/add',
 					headers : {
 						'Content-Type' : 'Application/json'
@@ -72,12 +72,12 @@ Vue.component('demo', {
 						scope.datas.loading = false;
 						res = vue.global.common.resHandle(res);
 						if(res.status != '2000'){
-							that.ctrl.alert({
+							that.utils.alert({
 								message : res.error_message
 							})
 							return ;
 						}
-						that.ctrl.alert({
+						that.utils.alert({
 							message : '创建成功'
 						})
 						that.switchAddDataPanel();
@@ -85,7 +85,7 @@ Vue.component('demo', {
 					},
 					errorFunction : function(){
 						scope.datas.loading = false;
-						that.ctrl.alert({
+						that.utils.alert({
 							message : '网络错误'
 						})
 					}
@@ -164,7 +164,7 @@ Vue.component('demo', {
 			//提交表单
 			var form = {};
 			form[that.data.config.idName] = item[that.data.config.idName]; //设置id
-			that.ctrl.ajax({
+			that.utils.ajax({
 				url : keke.config.baseUrl + '/api/m/' + that.data.config.pathName + '/delete',
 				headers : {
 					'Content-Type' : 'Application/json'
@@ -175,19 +175,19 @@ Vue.component('demo', {
 					scope.datas.loading = false;
 					res = vue.global.common.resHandle(res);
 					if(res.status != '2000'){
-						that.ctrl.alert({
+						that.utils.alert({
 							message : res.error_message
 						})
 						return ;
 					}
-					that.ctrl.alert({
+					that.utils.alert({
 						message : '删除成功'
 					})
 					that.refresh();
 				},
 				errorFunction : function(){
 					scope.datas.loading = false;
-					that.ctrl.alert({
+					that.utils.alert({
 						message : '网络错误'
 					})
 				}
@@ -211,7 +211,7 @@ Vue.component('demo', {
 					form.content = scope.panels.update.editor.txt.html();
 				}
 
-				that.ctrl.ajax({
+				that.utils.ajax({
 					url : keke.config.baseUrl + '/api/m/' + that.data.config.pathName + '/update',
 					headers : {
 						'Content-Type' : 'Application/json'
@@ -222,12 +222,12 @@ Vue.component('demo', {
 						scope.datas.loading = false;
 						res = vue.global.common.resHandle(res);
 						if(res.status != '2000'){
-							that.ctrl.alert({
+							that.utils.alert({
 								message : res.error_message
 							})
 							return ;
 						}
-						that.ctrl.alert({
+						that.utils.alert({
 							message : '修改成功'
 						})
 						that.switchUpdateDataPanel();
@@ -235,7 +235,7 @@ Vue.component('demo', {
 					},
 					errorFunction : function(){
 						scope.datas.loading = false;
-						that.ctrl.alert({
+						that.utils.alert({
 							message : '网络错误'
 						})
 					}

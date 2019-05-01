@@ -22,8 +22,9 @@ keke.config = {
 		router : "demo"
 	}],
 
-	baseUrl : location.origin, //根目录路径
-	baseResUrl : location.origin + "/res", //资源根目录路径
+	baseUrl : location.origin + "/keke", //根目录路径+业务
+	baseResUrl : location.origin + "/keke/res", //资源根目录路径
+	baseOrigin : location.origin, //源站点
 }
 
 function loadInitFile(mode){
@@ -32,12 +33,21 @@ function loadInitFile(mode){
 	document.body.appendChild(dom);
 }
 
-$.ajax({
-	url : keke.config.baseUrl + "/keke/api/p/mode/get",
-	success : function(res){
-		loadInitFile(res.mode);
-	},
-	error : function(e){
-		alert('网络错误！')
-	}
-})
+function accessSuccess(){
+	$.ajax({
+		url : keke.config.baseUrl + "/api/p/mode/get",
+		success : function(res){
+			loadInitFile(res.mode);
+		},
+		error : function(e){
+			alert('网络错误！')
+		}
+	})
+}
+
+function access () {
+	//DO SOMETHING:
+	accessSuccess();
+}
+
+access()

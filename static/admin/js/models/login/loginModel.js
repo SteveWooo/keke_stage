@@ -1,4 +1,4 @@
-keke.leaves.login = {
+keke.models.login = {
 	form_data : {
 		account : "",
 		password : "",

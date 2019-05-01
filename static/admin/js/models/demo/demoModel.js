@@ -1,4 +1,4 @@
-keke.leaves.demo = {
+keke.models.demo = {
 	config : {
 		name : "demo",
 		pathName : "demo",
