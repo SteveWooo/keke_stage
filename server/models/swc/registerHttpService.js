@@ -29,7 +29,7 @@ async function registerHttpService(swc, options){
 	/**
 	* 前置处理中间件
 	*/
-	middlewares.push(await require(`${path.resolve()}/server/middlewares/httpCommon/preHandle`)(swc, {
+	middlewares.push(await require(`${__dirname}/../../middlewares/httpCommon/preHandle`)(swc, {
 		config : m.config
 	}));
 	
@@ -38,7 +38,7 @@ async function registerHttpService(swc, options){
 	*/
 	if(m.config.middlewares){
 		for(var i=0;i<m.config.middlewares.length;i++){
-			middlewares.push(require(`${path.resolve()}/server/middlewares/${m.config.middlewares[i]}`));
+			middlewares.push(require(`${__dirname}/../../middlewares/${m.config.middlewares[i]}`));
 		}
 	}
 	
@@ -50,7 +50,7 @@ async function registerHttpService(swc, options){
 	/**
 	* 后置处理中间件
 	*/
-	middlewares.push(await require(`${path.resolve()}/server/middlewares/httpCommon/afterHandle`)(swc, {
+	middlewares.push(await require(`${__dirname}/../../middlewares/httpCommon/afterHandle`)(swc, {
 		config : m.config
 	}));
 

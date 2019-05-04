@@ -28,11 +28,11 @@ async function loadConfig(swc){
 	//此处填入配置
 	if(!swc.argv.m){
 		//默认开发模式
-		swc.config = require(`${path.resolve()}/conf/config.json`);
+		swc.config = require(`${__dirname}/../../../conf/config.json`);
 	} else if (swc.argv.m === 'prod'){
 		//设置一下全局环境
 		swc.mode = swc.argv.m;
-		swc.config = require(`${path.resolve()}/conf/config.prod.json`);
+		swc.config = require(`${__dirname}/../../../conf/config.prod.json`);
 	} else {
 		swc.log.error('4005:输入参数错误(m)');
 		throw '';
@@ -121,27 +121,34 @@ async function init(){
 		},
 
 		/**
+		* 业务对象
+		*/
+		models : {},
+
+		/**
 		* 业务中间件
 		*/
 		middlewares : {
-			authAdmin : require(`${path.resolve()}/server/middlewares/authAdmin`),
-			authWechat : require(`${path.resolve()}/server/middlewares/authWechat`),
+			authAdmin : require(`${__dirname}/../../middlewares/authAdmin`),
+			authWechat : require(`${__dirname}/../../middlewares/authWechat`),
 		},
 
 		/**
 		* 抽象底层工具库
 		*/
 		utils : {
-			image : require(`${path.resolve()}/server/utils/image`)
+			image : require(`${__dirname}/../../utils/image`)
 		},
 
 		/**
 		* 控制器载入接口
 		*/
 		registerHttpService : require('./registerHttpService'),
+		registerMiddleware : require('./registerMiddleware'),
 		registerGlobalData : require('./registerGlobalData'),
 		registerMysqlDao : require('./registerMysqlDao'),
 		registerStatic : require('./registerStatic'),
+		registerModel : require('./registerModel'),
 	}
 
 	swc = await loadConfig(swc);

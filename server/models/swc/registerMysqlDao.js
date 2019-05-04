@@ -4,7 +4,7 @@
 */
 const path = require('path')
 module.exports = async (swc, options)=>{
-	swc = await require(`${path.resolve()}/server/dao/init`)(swc);
-	swc = await require(`${path.resolve()}/server/models/mysql/defineModel`)(swc, {});
+	swc = await require(`${__dirname}/../../dao/init`)(swc);
+	swc = await require(`${__dirname}/../models/mysql/defineModel`)(swc, {});
 	return swc;
 }
