@@ -1,5 +1,6 @@
 /**
-* options no param,直接原路返回swc
+* @param options.servicePath 索引和数据模型文件的路径。该文件有规定的编写模式，
+* 暴露2个api：defineModel和defineIndex
 * )需要先定义数据模型，同步到数据库，才能定义索引关系
 */
 
@@ -12,7 +13,7 @@ async function syncDatabase(swc){
 }
 
 module.exports = async (swc, options)=>{
-	var bussinessModel = require(`${__dirname}/../../../services/mysql/defineModel`)
+	var bussinessModel = require(options.servicePath);
 	swc = await bussinessModel.defineModel(swc);
 	swc.log.info('载入:数据库模型');
 	if(swc.argv.d === '1'){

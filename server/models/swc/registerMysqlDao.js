@@ -5,6 +5,6 @@
 const path = require('path')
 module.exports = async (swc, options)=>{
 	swc = await require(`${__dirname}/../../dao/init`)(swc);
-	swc = await require(`${__dirname}/../../dao/defineModel`)(swc, {});
+	swc = await require(`${__dirname}/../../dao/defineModel`)(swc, options);
 	return swc;
 }
