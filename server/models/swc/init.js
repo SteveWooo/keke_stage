@@ -28,11 +28,11 @@ async function loadConfig(swc){
 	//此处填入配置
 	if(!swc.argv.m){
 		//默认开发模式
-		swc.config = require(`${__dirname}/../../../conf/config.json`);
+		swc.config = require(`${__dirname}/../../../../conf/config.json`);
 	} else if (swc.argv.m === 'prod'){
 		//设置一下全局环境
 		swc.mode = swc.argv.m;
-		swc.config = require(`${__dirname}/../../../conf/config.prod.json`);
+		swc.config = require(`${__dirname}/../../../../conf/config.prod.json`);
 	} else {
 		swc.log.error('4005:输入参数错误(m)');
 		throw '';
