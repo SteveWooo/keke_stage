@@ -137,7 +137,8 @@ async function init(){
 		* 抽象底层工具库
 		*/
 		utils : {
-			image : require(`${__dirname}/../../utils/image`)
+			image : require(`${__dirname}/../../utils/image`),
+			base64 : require(`${__dirname}/../../utils/base64`)
 		},
 
 		/**
