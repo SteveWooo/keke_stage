@@ -38,7 +38,8 @@ async function registerHttpService(swc, options){
 	*/
 	if(m.config.middlewares){
 		for(var i=0;i<m.config.middlewares.length;i++){
-			middlewares.push(require(`${__dirname}/../../middlewares/${m.config.middlewares[i]}`));
+			// middlewares.push(require(`${__dirname}/../../middlewares/${m.config.middlewares[i]}`));
+			middlewares.push(swc.middlewares[m.config.middlewares[i]]);
 		}
 	}
 	
