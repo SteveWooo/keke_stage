@@ -126,11 +126,11 @@ async function init(){
 		models : {},
 
 		/**
-		* 业务中间件
+		* 业务中间件，手动注册去吧。
 		*/
 		middlewares : {
-			authAdmin : require(`${__dirname}/../../middlewares/authAdmin`),
-			authWechat : require(`${__dirname}/../../middlewares/authWechat`),
+			// authAdmin : require(`${__dirname}/../../middlewares/authAdmin`),
+			// authWechat : require(`${__dirname}/../../middlewares/authWechat`),
 		},
 
 		/**
@@ -140,6 +140,11 @@ async function init(){
 			image : require(`${__dirname}/../../utils/image`),
 			base64 : require(`${__dirname}/../../utils/base64`)
 		},
+
+		/**
+		* 统一错误入口
+		*/
+		Error : require(`${__dirname}/../status/error`),
 
 		/**
 		* 控制器载入接口

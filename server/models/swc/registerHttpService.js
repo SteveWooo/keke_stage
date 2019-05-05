@@ -54,7 +54,7 @@ async function registerHttpService(swc, options){
 	middlewares.push(await require(`${__dirname}/../../middlewares/httpCommon/afterHandle`)(swc, {
 		config : m.config
 	}));
-
+	
 	swc.app[m.config.method]('/' + swc.config.server.bussiness_name + m.config.path, ...[middlewares]);
 
 	return swc;
