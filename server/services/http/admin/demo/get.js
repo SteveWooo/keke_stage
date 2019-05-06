@@ -8,7 +8,7 @@ module.exports = {
 		method : 'get',
 		middlewares : [],
 		model : {
-			status : 2000,
+			code : 2000,
 			error_message : '',
 			data : {}
 		}
@@ -25,7 +25,7 @@ module.exports = {
 			})
 
 			if(result.count == 0){
-				req.response.status = 4004;
+				req.response.code = 4004;
 				req.response.error_message = "找不到该通知";
 				next();
 				return ;
@@ -79,7 +79,7 @@ module.exports = {
 
 			next();
 		}catch(e){
-			req.response.status = 5000;
+			req.response.code = 5000;
 			req.response.error_message = e.message;
 			next();
 			return ;

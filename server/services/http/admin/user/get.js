@@ -4,7 +4,7 @@ module.exports = {
 		method : 'get',
 		middlewares : ['authAdmin'],
 		model : {
-			status : 2000,
+			code : 2000,
 			source : {},
 		}
 	},

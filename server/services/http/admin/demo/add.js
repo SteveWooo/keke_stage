@@ -8,7 +8,7 @@ module.exports = {
 		method : 'post',
 		middlewares : [],
 		model : {
-			status : 2000,
+			code : 2000,
 			error_message : '',
 			data : {}
 		}
@@ -18,7 +18,7 @@ module.exports = {
 		var swc = req.swc;
 
 		if(!query.name){
-			req.response.status = 4005;
+			req.response.code = 4005;
 			req.response.error_message = "参数错误";
 			next();
 			return ;
@@ -28,7 +28,7 @@ module.exports = {
 			image : query.image
 		})
 		if(!image){
-			req.response.status = 4001;
+			req.response.code = 4001;
 			req.response.error_message = "图片保存失败";
 			next();
 			return ;
@@ -57,7 +57,7 @@ module.exports = {
 			req.response.data = result;
 			next();
 		}catch(e){
-			req.response.status = 5000;
+			req.response.code = 5000;
 			req.response.error_message = e.message;
 			next();
 			return ;

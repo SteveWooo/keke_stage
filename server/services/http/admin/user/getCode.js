@@ -19,7 +19,7 @@ module.exports = {
 		method : 'get',
 		middlewares : [],
 		model : {
-			status : 2000,
+			code : 2000,
 			source : {}
 		}
 	},

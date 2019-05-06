@@ -8,7 +8,7 @@ module.exports = {
 		method : 'post',
 		middlewares : [],
 		model : {
-			status : 2000,
+			code : 2000,
 			source : {},
 			error_message : ''
 		}
@@ -18,14 +18,14 @@ module.exports = {
 		var swc = req.swc;
 
 		if(!query.account || !query.password || !query.code) {
-			req.response.status = 4005;
+			req.response.code = 4005;
 			req.response.error_message = "参数错误";
 			next();
 			return ;
 		}
 
 		if(!req.session || !req.session.code || !query.code || req.session.code != query.code.toLowerCase()){
-			req.response.status = 4005;
+			req.response.code = 4005;
 			req.response.error_message = "验证码错误";
 			next();
 			return ;
@@ -43,7 +43,7 @@ module.exports = {
 			})
 
 			if(result.count == 0){
-				req.response.status = 4003;
+				req.response.code = 4003;
 				req.response.error_message = "登陆失败";
 				next();
 				return ;
@@ -63,7 +63,7 @@ module.exports = {
 			next();
 		}catch(e){
 			console.log(e);
-			req.response.status = 5000;
+			req.response.code = 5000;
 			req.response.error_message = "系统错误";
 			next();
 			return ;
