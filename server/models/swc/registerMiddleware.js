@@ -40,7 +40,7 @@ async function travelServiceFiles(swc, options){
 					options.dirStack.join('/') + '/' + dirs[i].replace('.js', ''),
 			})
 		} else {
-			var nextDirStack = options.dirStack;
+			var nextDirStack = Array.from(options.dirStack);
 			nextDirStack.push(dirs[i]);
 			var nextOptions = {
 				filePath : `${options.filePath}/${dirs[i]}`,

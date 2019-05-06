@@ -14,7 +14,7 @@ module.exports = async (swc, options)=>{
 					admin : {},
 				},
 				responseHeaders : {},
-				status : 2000,
+				code : 2000,
 				data : {},
 				error_message : ''
 			}
