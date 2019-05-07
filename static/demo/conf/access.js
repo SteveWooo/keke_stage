@@ -3,23 +3,23 @@
 */
 keke.config = {
 	components : [
-		'hello', 
-		'login',
-		'demo',
+		'stickerCategory',
+		'login'
 	],
 	menu : [{
+		text : "原图分类管理",
+		icon: 'history',
+		router : "stickerCategory"
+	}, {
 		text : "登陆",
 		icon: 'history',
 		router : "login"
-	},{
-		text : "hello",
-		icon: 'history',
-		router : "hello"
-	},{
-		text : "demo",
-		icon: 'history',
-		router : "demo"
 	}],
+
+	routerName : {
+		'stickerCategory' : '表情原图分类管理',
+		'login' : '登陆'
+	},
 
 	baseUrl : location.origin + "/keke", //根目录路径+业务
 	baseResUrl : location.origin + "/keke/res", //资源根目录路径

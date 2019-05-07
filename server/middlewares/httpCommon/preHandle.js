@@ -10,8 +10,8 @@ module.exports = async (swc, options)=>{
 		} else {
 			req.response = {
 				source : {
-					wechat : {},
-					admin : {},
+					type : '',
+					user_id : ''
 				},
 				responseHeaders : {},
 				code : 2000,

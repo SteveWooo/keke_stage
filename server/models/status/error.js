@@ -14,7 +14,8 @@ const ERROR_CODE = {
 	'5000' : '系统查询错误',
 
 	//对内
-	'50005' : '重名错误'
+	'50005' : '重名错误',
+	'40005' : '函数传参错误'
 }
 
 module.exports = async (swc, options)=>{

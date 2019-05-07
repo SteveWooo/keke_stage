@@ -7,6 +7,7 @@ const IMAGE_HEADERS = {
 }
 /*
 * @param image图片base64
+* @param filePath 保存到这个地方
 * 保存文件到本地
 */
 var saveImage = function(swc, options){
@@ -21,7 +22,15 @@ var saveImage = function(swc, options){
 	options.image = options.image.replace(/^data:image\/\w+;base64,/, "");
 
 	var data_buffer = Buffer.from(options.image, 'base64');
-	fs.writeFileSync(swc.config.server.base_res_path + "/" + filename, data_buffer);
+
+	/**
+	* 如果指定了保存目录，就保存过去。否则保存到默认服务器资源目录
+	*/
+	if(options.filePath){
+		fs.writeFileSync(options.filePath + "/" + filename, data_buffer);
+	} else {
+		fs.writeFileSync(swc.config.server.base_res_path + "/" + filename, data_buffer);
+	}
 	return {
 		filename : filename
 	}
