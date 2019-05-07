@@ -38,6 +38,8 @@ function accessSuccess(){
 		success : function(res){
 			keke.init({
 				mode : res.mode
+			}, function(){
+				
 			});
 		},
 		error : function(e){

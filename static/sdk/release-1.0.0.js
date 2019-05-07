@@ -32,7 +32,7 @@ function initVue(){
 									if(typeof res != "object"){
 										res = JSON.parse(res);
 									}
-									if(res.status == "3002"){
+									if(res.code == "3002"){
 										let hash = res.hash;
 										location.hash = hash;
 										return res;
@@ -79,28 +79,7 @@ function initVue(){
 					},
 
 					//管理员数据
-					adminUser : undefined,
-					initHandle : function(){
-						//登陆页面不需要获取管理员信息
-						if(location.hash == "login"){
-							return ;
-						}
-						vue.global.common.utils.actions.ajax({
-							url : keke.config.baseUrl + "/api/m/user/get",
-							type : "post",
-							successFunction : function(res){
-								if(res.status != "2000"){
-									alert(res.error_message);
-									return res;
-								}
-								vue.global.common.adminUser = res.source.admin_user;
-								return res;
-							},
-							errorFunction : function(){
-								alert("网络错误");
-							}
-						})
-					}
+					adminUser : undefined
 				},
 				pages : keke.models
 			},
@@ -177,7 +156,7 @@ keke.loadFile = function(options, callback){
 	}
 }
 
-keke.init = function(options){
+keke.init = function(options, callback){
 	//配置的加载组件列表
 	var components = keke.config.components;
 	var sdkList = {
@@ -226,6 +205,7 @@ keke.init = function(options){
 	}, function(result){
 		console.log("loaded files");
 		initVue();
+		callback();
 	})
 }
 keke.models = {};
