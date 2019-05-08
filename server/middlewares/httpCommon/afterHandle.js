@@ -7,11 +7,11 @@ module.exports = async (swc, options)=>{
 		if(req.response.sent === true){
 			return ;
 		}
-		if(!req.responseHeaders || !('Content-Type' in req.responseHeaders)){
+		if(!req.response.responseHeaders || !('Content-Type' in req.response.responseHeaders)){
 			res.header("Content-Type", "application/json; charset=utf-8")
 		}
-		for(var i in req.responseHeaders){
-			res.header(i, req.responseHeaders[i]);
+		for(var i in req.response.responseHeaders){
+			res.header(i, req.response.responseHeaders[i]);
 		}
 		res.send(JSON.stringify(req.response));
 	}
