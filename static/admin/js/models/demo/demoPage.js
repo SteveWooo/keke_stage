@@ -70,7 +70,6 @@ Vue.component('demo', {
 					data : JSON.stringify(form),
 					successFunction : function(res){
 						scope.datas.loading = false;
-						res = vue.global.common.resHandle(res);
 						if(res.status != '2000'){
 							that.utils.alert({
 								message : res.error_message
@@ -173,7 +172,6 @@ Vue.component('demo', {
 				method : "post",
 				successFunction : function(res){
 					scope.datas.loading = false;
-					res = vue.global.common.resHandle(res);
 					if(res.status != '2000'){
 						that.utils.alert({
 							message : res.error_message
@@ -220,7 +218,6 @@ Vue.component('demo', {
 					data : JSON.stringify(form),
 					successFunction : function(res){
 						scope.datas.loading = false;
-						res = vue.global.common.resHandle(res);
 						if(res.status != '2000'){
 							that.utils.alert({
 								message : res.error_message
