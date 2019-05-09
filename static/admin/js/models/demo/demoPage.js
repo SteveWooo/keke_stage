@@ -15,7 +15,7 @@ Vue.component('demo', {
 					+ '&item_per_page=' + scope.datas.itemPerPage,
 				successFunction : function(res){
 					scope.datas.loading = false;
-					if(res.status != '2000'){
+					if(res.code != '2000'){
 						that.utils.alert({
 							message : res.error_message
 						})
@@ -70,7 +70,7 @@ Vue.component('demo', {
 					data : JSON.stringify(form),
 					successFunction : function(res){
 						scope.datas.loading = false;
-						if(res.status != '2000'){
+						if(res.code != '2000'){
 							that.utils.alert({
 								message : res.error_message
 							})
@@ -172,7 +172,7 @@ Vue.component('demo', {
 				method : "post",
 				successFunction : function(res){
 					scope.datas.loading = false;
-					if(res.status != '2000'){
+					if(res.code != '2000'){
 						that.utils.alert({
 							message : res.error_message
 						})
@@ -218,7 +218,7 @@ Vue.component('demo', {
 					data : JSON.stringify(form),
 					successFunction : function(res){
 						scope.datas.loading = false;
-						if(res.status != '2000'){
+						if(res.code != '2000'){
 							that.utils.alert({
 								message : res.error_message
 							})

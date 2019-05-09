@@ -12,16 +12,13 @@ web脚手架
 5. mysql
 
 ***
-### 配置入口
-1. 服务端配置入口 : /conf/config.json (config.prod.config为生产模式)
-2. 后台前端配置入口 : ${staticpath}/conf/config.json
+### 使用说明：
+https://github.com/stevewooo/keke_stage_demo
 
-***
-### 启动： 
-1. 服务启动：node startup.js
-2. 进程参数
-```
-@param -m : 服务器模式
-@param -c : 进程数
-@param -syncdb : 同步模型到数据库
-```
+### 版本
+
+（直接checkout到对应的版本号就行了）
+
+|版本号|发版日期|备注|
+|-|-|-|
+|release-1.0.3|5/8|调整前端demo内容，调整登陆逻辑|
