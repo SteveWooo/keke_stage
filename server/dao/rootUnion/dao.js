@@ -1,5 +1,6 @@
 module.exports = {
-	getTopNumber : require('./getTopNumber'),
-	newBlock : require('./newBlock'),
-	buildTopZone : require('./buildTopZone'),
+	getTopBlock : require('./getTopNumber'),
+	addBlock : require('./newBlock'),
+	getPreBlock : require('./getPreBlock'),
+	getBlock : require('./getBlock'),
 }
