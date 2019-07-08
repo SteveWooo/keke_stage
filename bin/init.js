@@ -42,6 +42,10 @@ async function main(){
 		type : 'dir',
 		path : 'services/http'
 	});
+	await create({
+		type : 'dir',
+		path : 'unionTest'
+	});
 
 	var startupJS = `
 async function main(){

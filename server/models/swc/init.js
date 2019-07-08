@@ -142,6 +142,13 @@ async function init(){
 		},
 
 		/**
+		* 服务
+		*/
+		services : {
+
+		},
+
+		/**
 		* 统一错误入口
 		*/
 		Error : require(`${__dirname}/../status/error`),
@@ -153,8 +160,10 @@ async function init(){
 		registerMiddleware : require('./registerMiddleware'),
 		registerGlobalData : require('./registerGlobalData'),
 		registerMysqlDao : require('./registerMysqlDao'),
+		registerService : require('./registerService'),
 		registerStatic : require('./registerStatic'),
 		registerModel : require('./registerModel'),
+		registerDao : require('./registerDao'),
 	}
 
 	swc = await loadConfig(swc);
