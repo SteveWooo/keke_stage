@@ -20,6 +20,10 @@ async function main(){
 	});
 	await create({
 		type : 'dir',
+		path : 'dao'
+	});
+	await create({
+		type : 'dir',
 		path : 'middlewares'
 	});
 	await create({

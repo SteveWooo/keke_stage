@@ -1,6 +1,7 @@
 /**
 * RR = 其中一条DNS记录
 */
+const crypto = require('crypto');
 exports.create = async function (swc, options){
 	var rr = {
 		type : '', //A AAAA CNAME MX NS DS DNSKEY RRSIG
@@ -24,6 +25,12 @@ exports.create = async function (swc, options){
 	* result in DNS :
 	* baidu.com.	100	IN	A	112.0.100.3
 	*/
+	var source = '';
+	for(var i in rr){
+		source += rr[i];
+	}
+
+	rr.key = crypto.createHash('sha1').update(source).digest('hex');
 	return rr;
 }
 
