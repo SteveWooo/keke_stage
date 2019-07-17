@@ -66,20 +66,22 @@ function login(swc, options){
 
 		request.post(option, function(err, res, body){
 			if(err || res.statusCode != 200){
+				swc.log.error(`${options.username} login failed. retrying`);
 				resolve(undefined);
 				return ;
 			}
 			body = JSON.parse(body);
-			resolve(body);
+			setTimeout(()=>{
+				resolve(body);
+			}, 1000);
+			
 		})
 	})
 }
 
 module.exports = async function(swc, options){
-	options.loginResult = await login(swc, options);
-	if(!options.loginResult || options.loginResult.retcode != '20000000'){
-		swc.log.error(`${options.username} login failed.${options.loginResult == undefined ? 'unknow': options.loginResult.msg}`);
-		return undefined;
+	while(!options.loginResult || options.loginResult.retcode != '20000000') {
+		options.loginResult = await login(swc, options);
 	}
 
 	options.sub = await getCookie(swc, options);
