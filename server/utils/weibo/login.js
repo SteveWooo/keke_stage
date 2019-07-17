@@ -73,8 +73,7 @@ function login(swc, options){
 			body = JSON.parse(body);
 			setTimeout(()=>{
 				resolve(body);
-			}, 1000);
-			
+			}, 500);
 		})
 	})
 }
