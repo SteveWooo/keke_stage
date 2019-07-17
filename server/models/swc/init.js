@@ -89,11 +89,11 @@ async function init(){
 			},
 			info : function(msg){
 				var data = swc.log.cutMsg(msg);
-				console.log('\033[42;37m√ => ' + data[0] + ' :\033[0m ' + data[1]);
+				console.log(new Date() + '\033[42;37m√ => ' + data[0] + ' :\033[0m ' + data[1]);
 			},
 			error : function(msg){
 				var data = swc.log.cutMsg(msg);
-				console.log('x => \033[41;37m ' + data[0] + ' :\033[0m' + data[1]);
+				console.log(new Date() + 'x => \033[41;37m ' + data[0] + ' :\033[0m' + data[1]);
 			}
 		},
 

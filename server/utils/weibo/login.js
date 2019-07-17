@@ -65,6 +65,10 @@ function login(swc, options){
 
 
 		request.post(option, function(err, res, body){
+			if(err || res.statusCode != 200){
+				resolve(undefined);
+				return ;
+			}
 			body = JSON.parse(body);
 			resolve(body);
 		})
@@ -73,18 +77,20 @@ function login(swc, options){
 
 module.exports = async function(swc, options){
 	options.loginResult = await login(swc, options);
-
-	if(options.loginResult.retcode != '20000000'){
-		swc.log.error(`${options.username} login failed.${options.loginResult.msg}`);
+	if(!options.loginResult || options.loginResult.retcode != '20000000'){
+		swc.log.error(`${options.username} login failed.${options.loginResult == undefined ? 'unknow': options.loginResult.msg}`);
 		return undefined;
 	}
 
 	options.sub = await getCookie(swc, options);
 	options.st = await getSt(swc, options);
 
+	swc.log.info(`Login success -- ${options.username}`);
+
 	return {
 		username : options.username,
 		sub : options.sub,
-		st : options.st
+		st : options.st,
+		uid : options.loginResult.data.uid
 	}
 }
