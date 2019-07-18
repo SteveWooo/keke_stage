@@ -33,6 +33,10 @@ async function loadConfig(swc){
 		//设置一下全局环境
 		swc.mode = swc.argv.m;
 		swc.config = require(`${__dirname}/../../../../conf/config.prod.json`);
+	} else if (swc.argv.m === 'test') {
+		//设置一下全局环境
+		swc.mode = swc.argv.m;
+		swc.config = require(`${__dirname}/../../../../conf/config.test.json`);
 	} else {
 		swc.log.error('4005:输入参数错误(m)');
 		throw '';
