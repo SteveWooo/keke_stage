@@ -22,7 +22,7 @@ module.exports = async (swc, options)=>{
 		}
 
 		//默认响应头
-		req.response.responseHeaders = {};
+		req.responseHeaders = {};
 		next();
 	}
 }

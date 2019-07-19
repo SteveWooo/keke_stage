@@ -1,8 +1,8 @@
 keke.models.stickerCategory = {
 	config : {
 		name : "stickerCategory",
-		pathName : "stickerCategory",
-		idName : "stickerCategoryId",
+		pathName : "sticker_category",
+		idName : "sticker_category_id",
 	},
 	datas : {
 		pageNow : 1, //当前页面
@@ -15,7 +15,7 @@ keke.models.stickerCategory = {
 			text : "封面图",
 			sortable : false
 		},{
-			text : "标题",
+			text : "表情库名称",
 			sortable: false,
 		},{
 			text : "简述",
@@ -31,7 +31,8 @@ keke.models.stickerCategory = {
 			editor : undefined,
 			form : {
 				title : '',
-				description : ''
+				description : '',
+				icon_image : '',
 			}
 		},
 		update : {
