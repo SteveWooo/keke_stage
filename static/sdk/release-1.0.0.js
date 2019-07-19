@@ -5,6 +5,7 @@ function initVue(){
 		el : '#app',
 		data : {
 			routerName : keke.config.routerName,
+			subTitle : keke.config.subTitle,
 			router : "",
 			global : {
 				common : {
@@ -65,6 +66,39 @@ function initVue(){
 								}
 
 								return undefined;
+							},
+							deleteQuery : function(name){
+							    var loca = window.location;
+							    var baseUrl = loca.origin + loca.pathname + "?";
+							    var query = loca.search.substr(1);
+							    if (query.indexOf(name)>-1) {
+							        var obj = {}
+							        var arr = query.split("&");
+							        for (var i = 0; i < arr.length; i++) {
+							            arr[i] = arr[i].split("=");
+							            obj[arr[i][0]] = arr[i][1];
+							        };
+							        delete obj[name];
+							        var url = baseUrl + JSON.stringify(obj).replace(/[\"\{\}]/g,"").replace(/\:/g,"=").replace(/\,/g,"&");
+							        return url
+							    };
+							},
+							ls : {
+								set : function(key, value){
+									localStorage.setItem(key, value);
+								},
+								get : function(key){
+									return localStorage.getItem(key);
+								}
+							},
+							resHandle : function(res){
+								if(res.code != 2000){
+									vue.global.common.utils.actions.alert({
+										message : res.error_message
+									})
+									return false;
+								}
+								return true;
 							}
 						},
 
