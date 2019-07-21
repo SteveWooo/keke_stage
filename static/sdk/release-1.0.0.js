@@ -1,5 +1,6 @@
 var keke = {};
 var vue = {};
+var vueEventHub = new Vue();
 function initVue(){
 	vue = new Vue({
 		el : '#app',
@@ -157,11 +158,24 @@ function initVue(){
 
 			toLoginPage : function(){
 				location.hash = "login";
+			},
+
+			gotoThemeList : function(item){
+				vue.global.pages['themeList'].conditions.theme_category_id = item.theme_category_id;
+				keke.config.routerName['themeList'] = item.title;
+				location.hash = 'themeList';
+				vue.global.pages.themeCategory.datas.drawer = !vue.global.pages.themeCategory.datas.drawer;
+				vue.$emit('gotoThemeList', item);
+			},
+
+			gotoShare : function(){
+				var theme_id = vue.global.pages['theme'].conditions.theme_id;
+				location.href = keke.config.baseUrl + '/share?theme_id=' + theme_id;
 			}
 		},
 		mounted : function(){
 			this.init();
-		}
+		},
 	})
 }
 
