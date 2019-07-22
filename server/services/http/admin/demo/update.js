@@ -41,7 +41,7 @@ module.exports = {
 			var result = await selfService.rows[0].update({
 				status : query.status,
 				update_at : now,
-				update_by : req.source.admin_user.admin_id
+				update_by : req.source.user_id
 			});
 			req.response.data = result;
 			next();

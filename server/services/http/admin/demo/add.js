@@ -37,7 +37,7 @@ module.exports = {
 		var now = +new Date();
 		var idSource = [
 			"demos",
-			req.source.admin_user.admin_id,
+			req.source.source.user_id,
 			now,
 			swc.config.server.public_salt
 		].join("&");
@@ -48,8 +48,8 @@ module.exports = {
 
 			create_at : now,
 			update_at : now,
-			create_by : req.source.admin_user.admin_id,
-			update_by : req.source.admin_user.admin_id
+			create_by : req.source.user_id,
+			update_by : req.source.user_id
 		}
 
 		try{
