@@ -143,7 +143,8 @@ async function init(){
 		utils : {
 			image : require(`${__dirname}/../../utils/image`),
 			base64 : require(`${__dirname}/../../utils/base64`),
-			weibo : require(`${__dirname}/../../utils/weibo/util`)
+			weibo : require(`${__dirname}/../../utils/weibo/util`),
+			sortDic : require(`${__dirname}/../../utils/sortDic`),
 		},
 
 		/**
