@@ -13,6 +13,13 @@ async function syncDatabase(swc){
 }
 
 module.exports = async (swc, options)=>{
+	var path;
+	if(options.servicePath != undefined){
+		path = options.servicePath;
+	}
+	if(options.path != undefined){
+		path = options.path;
+	}
 	var bussinessModel = require(options.servicePath);
 	swc = await bussinessModel.defineModel(swc);
 	swc.log.info('载入:数据库模型');
