@@ -20,7 +20,7 @@ module.exports = async (swc, options)=>{
 	if(options.path != undefined){
 		path = options.path;
 	}
-	var bussinessModel = require(options.servicePath);
+	var bussinessModel = require(path);
 	swc = await bussinessModel.defineModel(swc);
 	swc.log.info('载入:数据库模型');
 	if(swc.argv.d === '1'){

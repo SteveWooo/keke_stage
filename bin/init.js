@@ -94,10 +94,76 @@ module.exports = async (swc, options)=>{
 }
 	`;
 
+	var daoJs = 
+`
+const Sequelize = require("sequelize");
+exports.defineModel = async function defineModel(swc){
+	swc.dao.models.admins = swc.dao.seq.define("admins", {
+		user_id : {type : Sequelize.STRING(32)}, //唯一ID
+		nick_name : {type : Sequelize.TEXT}, //昵称
+		
+		name : {type : Sequelize.STRING(100)},
+		password : {type : Sequelize.STRING(32)},
+
+		create_by : {type : Sequelize.STRING(32)},
+		update_by : {type : Sequelize.STRING(32)},
+		create_at : {type : Sequelize.STRING(13)},
+		update_at : {type : Sequelize.STRING(13)},
+	})
+	return swc;
+}
+
+exports.defineIndex = async function defineIndex(swc){
+	// swc.dao.models.demos.belongsTo(swc.dao.models.admins, {
+	// 	foreignKey : 'create_by', //多的一个数据实体
+	// 	targetKey : 'admin_id', //少的一个数据实体
+	// 	as : 'admin'
+	// })
+
+	swc.log.info('载入:数据索引');
+	return swc;
+}
+`
+
+	var packageJson = 
+`
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "mysql2": "^1.6.5",
+    "request": "^2.88.0",
+    "sequelize": "^5.3.0",
+    "svg-captcha": "^1.3.12",
+    "wangeditor": "^3.1.1"
+  }
+}
+
+`
+
 	await create({
 		type : 'file',
 		path : 'startup.js',
 		content : startupJS
+	})
+	await create({
+		type : 'file',
+		path : 'package.json',
+		content : packageJson
+	})
+	await create({
+		type : 'file',
+		path : 'dao/mysql.js',
+		content : daoJs
 	})
 	await create({
 		type : 'file',
