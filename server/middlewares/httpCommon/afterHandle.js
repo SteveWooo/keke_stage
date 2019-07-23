@@ -13,6 +13,7 @@ module.exports = async (swc, options)=>{
 		for(var i in req.responseHeaders){
 			res.header(i, req.responseHeaders[i]);
 		}
+		res.header('Cache-Control', 'public, max-age=86400');
 		res.send(JSON.stringify(req.response));
 	}
 }
