@@ -72,6 +72,16 @@ async function loadExpressMiddlewares(swc){
 		next();
 	})
 
+	swc.app.all('*.js', function(req, res, next){
+		res.header('Cache-Control', 'public, max-age=86400');
+		next();
+	})
+
+	swc.app.all('*.css', function(req, res, next){
+		res.header('Cache-Control', 'public, max-age=86400');
+		next();
+	})
+
 	swc.app.use(bodyParser.urlencoded({extended: false}));
 	swc.app.use(bodyParser.json({"limit":"10000kb"}));
 	swc.app.use(session({
