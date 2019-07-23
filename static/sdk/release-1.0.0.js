@@ -170,7 +170,7 @@ function initVue(){
 
 			gotoShare : function(){
 				var theme_id = vue.global.pages['theme'].conditions.theme_id;
-				location.href = keke.config.baseUrl + '/share?theme_id=' + theme_id;
+				location.href = keke.config.baseOrigin + '/' + keke.config.baseBussinessName + '/share?theme_id=' + theme_id;
 			}
 		},
 		mounted : function(){
