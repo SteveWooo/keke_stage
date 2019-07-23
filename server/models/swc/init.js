@@ -56,6 +56,11 @@ async function loadExpressMiddlewares(swc){
 		res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
 		next()
 	})
+
+	swc.app.all('*.png', function(req, res, next){
+		res.header('Cache-Control', 'public, max-age=86400');
+		next();
+	})
 	swc.app.use(bodyParser.urlencoded({extended: false}));
 	swc.app.use(bodyParser.json({"limit":"10000kb"}));
 	swc.app.use(session({
