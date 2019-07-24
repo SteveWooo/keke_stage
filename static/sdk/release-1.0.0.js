@@ -171,6 +171,11 @@ function initVue(){
 			gotoShare : function(){
 				var theme_id = vue.global.pages['theme'].conditions.theme_id;
 				location.href = keke.config.baseOrigin + '/' + keke.config.baseBussinessName + '/share?theme_id=' + theme_id;
+			},
+
+			gotoMessageFlow : function(){
+				location.hash = 'messageFlow';
+				vue.global.pages.themeCategory.datas.drawer = !vue.global.pages.themeCategory.datas.drawer;
 			}
 		},
 		mounted : function(){
