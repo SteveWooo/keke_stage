@@ -252,8 +252,8 @@ keke.init = function(options, callback){
 	// })
 
 	//本地才需要loadFioe
-	if(keke.config.baseOrigin == 'localhost' || 
-		keke.config.baseOrigin == '127.0.0.1') {
+	if(keke.config.baseOrigin.indexOf('localhost') > 0 || 
+		keke.config.baseOrigin.indexOf('127.0.0.1') > 0) {
 		keke.loadFile({
 			num : 0,
 			groups : [modelList, sdkList, componentList, enterList],
