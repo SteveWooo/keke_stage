@@ -32,9 +32,9 @@ var saveImage = async function(swc, options){
 
 	var data_buffer = Buffer.from(options.image, 'base64');
 
-	var imageData = await getImageData(swc, {
-		dataBuffer : data_buffer
-	});
+	// var imageData = await getImageData(swc, {
+	// 	dataBuffer : data_buffer
+	// });
 	/**
 	* 如果指定了保存目录，就保存过去。否则保存到默认服务器资源目录
 	*/
@@ -45,8 +45,8 @@ var saveImage = async function(swc, options){
 	}
 	return {
 		filename : filename,
-		width : imageData.width,
-		height : imageData.height
+		// width : imageData.width,
+		// height : imageData.height
 	}
 }
 
