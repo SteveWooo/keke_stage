@@ -144,7 +144,8 @@ exports.defineIndex = async function defineIndex(swc){
     "request": "^2.88.0",
     "sequelize": "^5.3.0",
     "svg-captcha": "^1.3.12",
-    "wangeditor": "^3.1.1"
+    "wangeditor": "^3.1.1",
+    "images": "^3.0.2"
   }
 }
 
