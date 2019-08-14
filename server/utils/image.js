@@ -1,6 +1,5 @@
 const crypto = require("crypto");
 const fs = require("fs");
-const Image = require('images');
 	
 const IMAGE_HEADERS = {
 	"data:image/png;base64" : "png", 
@@ -8,6 +7,7 @@ const IMAGE_HEADERS = {
 }
 
 function getImageData (swc, options){
+	const Image = require('images');
 	return new Promise(resolve=>{
 		var result = Image(options.dataBuffer).size();
 		resolve(result);
