@@ -103,14 +103,14 @@ module.exports = async (swc, options)=>{
 const Sequelize = require("sequelize");
 exports.defineModel = async function defineModel(swc){
 	swc.dao.models.admins = swc.dao.seq.define("admins", {
-		user_id : {type : Sequelize.STRING(32)}, //唯一ID
+		user_id : {type : Sequelize.STRING(40)}, //唯一ID
 		nick_name : {type : Sequelize.TEXT}, //昵称
 		
 		name : {type : Sequelize.STRING(100)},
 		password : {type : Sequelize.STRING(32)},
 
-		create_by : {type : Sequelize.STRING(32)},
-		update_by : {type : Sequelize.STRING(32)},
+		create_by : {type : Sequelize.STRING(40)},
+		update_by : {type : Sequelize.STRING(40)},
 		create_at : {type : Sequelize.STRING(13)},
 		update_at : {type : Sequelize.STRING(13)},
 	})
@@ -244,7 +244,7 @@ main();
 	})
 	await create({
 		type: 'file',
-		path: 'public/publishTools',
+		path: 'public/publishTools.js',
 		content: publishTools
 	})
 }
