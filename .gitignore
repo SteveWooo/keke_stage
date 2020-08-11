@@ -65,3 +65,5 @@ package-lock.json
 
 #生产配置 不要乱来上传
 conf/config.prod.json
+
+tempTest/
